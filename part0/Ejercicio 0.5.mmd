@@ -1,0 +1,14 @@
+sequenceDiagram
+  actor Navegador as Navegador
+  actor Servidor as Servidor
+
+  Navegador ->> Servidor: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+  Servidor ->> Navegador: Codigo HTML
+  Navegador ->> Servidor: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+  Servidor ->> Navegador: Archivo main.css
+  Navegador ->> Servidor: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+  Servidor ->> Navegador: Archivo spa.js
+  Navegador ->> Servidor: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+  Servidor ->> Navegador: Archivo data.json
+
+

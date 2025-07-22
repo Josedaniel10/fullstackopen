@@ -1,0 +1,8 @@
+sequenceDiagram
+  actor Navegador as Navegador
+  actor Servidor as Servidor
+
+  Navegador ->> Servidor: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+  Servidor ->> Navegador: {"message":"note created"}
+
+
