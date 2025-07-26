@@ -1,15 +1,14 @@
 function Part(props) {
-    return <p>{props.part} {props.exercise}</p>
+    return <p>{props.name} {props.exercise}</p>
 }
 
 function Content(props) {
-    const [part1, part2, part3] = props.parts;
-    const [exercises1, exercises2, exercises3] = props.exercises;
+    const [part1, part2, part3] = props.info.parts;
   return (
     <>
-      <Part part={part1} exercise={exercises1}/>
-      <Part part={part2} exercise={exercises2}/>
-      <Part part={part3} exercise={exercises3}/>
+      <Part name={part1.name} exercise={part1.exercises}/>
+      <Part name={part2.name} exercise={part2.exercises}/>
+      <Part name={part3.name} exercise={part3.exercises}/>
     </>
   );
 }

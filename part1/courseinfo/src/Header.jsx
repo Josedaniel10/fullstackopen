@@ -1,6 +1,7 @@
 function Header(props) {
+    const {name} = props.course
     return (
-        <h1>{props.course}</h1>
+        <h1>{name}</h1>
     )
 }
 
