@@ -5,7 +5,6 @@ import ContactList from "./components/ContactList.jsx";
 import Filter from "./components/Filter.jsx";
 import Notification from "./components/Notification.jsx";
 
-const API_URL = 'http://localhost:3001/persons';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
