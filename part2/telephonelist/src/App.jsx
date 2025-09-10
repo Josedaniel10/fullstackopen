@@ -31,7 +31,6 @@ const App = () => {
     const changeContact = {
       name: newName,
       number: newNumber,
-      // id: contacts.length + 1,
     };
 
     if(changeContact.name === '' || changeContact.number === '') {

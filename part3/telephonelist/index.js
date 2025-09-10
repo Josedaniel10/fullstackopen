@@ -1,33 +1,14 @@
+require('dotenv').config()
+
 const express = require('express');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const Persons = require('./models/persons.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-let dataPersons = [
-  {
-    "id": 1,
-    "name": "Arto Hellas",
-    "number": "040-123456"
-  },
-  {
-    "id": 2,
-    "name": "Ada Lovelace",
-    "number": "39-44-5323523"
-  },
-  {
-    "id": 4,
-    "name": "Mary Poppendieck",
-    "number": "39-23-6423122"
-  }
-];
-
-function generateID() {
-    return Math.floor(Math.random() * 999999999999);
-}
 
 morgan.token('body', (req)=> {
     return JSON.stringify(req.body);
@@ -40,22 +21,22 @@ app.use(cors())
 
 app.use(express.static('dist'));
 
-app.get('/api/persons', (req, res) => {
-    res.json(dataPersons);
+app.get('/api/persons', async (req, res) => {
+    const persons = await Persons.find({});
+    res.json(persons);
 })
 
-app.get('/info', (req, res) => {
-    const persons = [...dataPersons];
+app.get('/info', async (req, res) => {
+    const persons = await Persons.find({});
     const formatDate = `${new Date().toDateString()} ${new Date().toTimeString()}`
     const info = `<p>Phonebook has info for ${persons.length} people</p><p>${formatDate}</p>`;
 
     res.send(info);
 })
 
-app.get('/api/persons/:id', (req, res) => {
+app.get('/api/persons/:id', async (req, res) => {
     const { id } = req.params;
-    const persons = [...dataPersons];
-    const person = persons.find(p => p.id.toString() === id);
+    const person = await Persons.findById(id);
 
     if (!person) {
         res.status(404).json({ error: 'The phone number was not found' });
@@ -65,45 +46,40 @@ app.get('/api/persons/:id', (req, res) => {
     res.json(person);
 })
 
-app.delete('/api/persons/:id', (req, res) => {
+app.delete('/api/persons/:id', async (req, res) => {
     const { id } = req.params;
-    const persons = [...dataPersons];
-    let changePersons = persons.filter(p => p.id.toString() !== id);
+    const person = await Persons.findByIdAndDelete(id);
+    console.log(person);
     
-    if (changePersons.length === persons.length) {
+    /* if (changePersons.length === persons.length) {
         res.status(400).json({ error: "The request is incorrect" });
         return;
-    }
-    
-    dataPersons = changePersons;
+    } */
+
     res.status(200).json({ message: 'Successful phone number deletion' })
 })
 
-app.post('/api/persons', morgan(mwMorganPost), (req, res) => {
+app.post('/api/persons', morgan(mwMorganPost), async (req, res) => {
     const { name, number } = req.body;
-    const persons = [...dataPersons];
 
     if (!name || !number) {
         res.status(400).json({ error: "Name and phone number are required" })
         return;
     }
 
-    const findName = persons.find(p => p.name === name);
-
-    if(findName) {
+    /*
+    if(foundName) {
         res.status(409).json({error: 'name must be unique'});
         return;
-    }
+    } */
 
-    const newPerson = {
+    const person = new Persons({
         name,
-        number,
-        id: generateID()
-    }
+        number
+    })
 
-    const changePersons = [...persons, newPerson];
-    dataPersons = changePersons;
-    res.json(newPerson);
+    let savedPerson = await person.save();
+    res.json(savedPerson);
 })
 
 const unknownEndpoint = (req, res, next) => {

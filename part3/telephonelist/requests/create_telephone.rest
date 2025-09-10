@@ -2,6 +2,6 @@ POST http://localhost:3000/api/persons
 Content-Type: application/json
 
 {
-    "name": "XD",
-    "number": "123456789"
+    "name": "Contacto desde REST Client",
+    "number": "52-2938-234"
 }
