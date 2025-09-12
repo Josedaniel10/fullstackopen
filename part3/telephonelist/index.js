@@ -10,7 +10,7 @@ const Persons = require('./models/persons.js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-morgan.token('body', (req)=> {
+morgan.token('body', (req) => {
     return JSON.stringify(req.body);
 })
 
@@ -34,59 +34,86 @@ app.get('/info', async (req, res) => {
     res.send(info);
 })
 
-app.get('/api/persons/:id', async (req, res) => {
+app.get('/api/persons/:id', async (req, res, next) => {
     const { id } = req.params;
-    const person = await Persons.findById(id);
 
-    if (!person) {
-        res.status(404).json({ error: 'The phone number was not found' });
-        return;
+    try {
+        const person = await Persons.findById(id);
+        if (!person) {
+            res.status(404).json({ error: 'The phone number was not found' });
+            return;
+        }
+        res.json(person);
+    } catch (err) {
+        next(err);
     }
-
-    res.json(person);
 })
 
-app.delete('/api/persons/:id', async (req, res) => {
+app.delete('/api/persons/:id', async (req, res, next) => {
     const { id } = req.params;
-    const person = await Persons.findByIdAndDelete(id);
-    console.log(person);
-    
-    /* if (changePersons.length === persons.length) {
-        res.status(400).json({ error: "The request is incorrect" });
-        return;
-    } */
-
-    res.status(200).json({ message: 'Successful phone number deletion' })
+    try {
+        const person = await Persons.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Successful phone number deletion' })
+    } catch (err) {
+        next(err);
+    }
 })
 
-app.post('/api/persons', morgan(mwMorganPost), async (req, res) => {
+app.post('/api/persons', morgan(mwMorganPost), async (req, res, next) => {
     const { name, number } = req.body;
 
-    if (!name || !number) {
-        res.status(400).json({ error: "Name and phone number are required" })
-        return;
+    try {
+        const person = new Persons({
+            name,
+            number
+        })
+        let savedPerson = await person.save();
+        res.json(savedPerson);
+    } catch (err) {
+        next(err);
     }
+})
 
-    /*
-    if(foundName) {
-        res.status(409).json({error: 'name must be unique'});
-        return;
-    } */
+app.put('/api/persons/:id', async (req, res, next) => {
+    const id = req.params.id;
+    const { name, number } = req.body;
 
-    const person = new Persons({
+    const person = {
         name,
         number
-    })
+    }
 
-    let savedPerson = await person.save();
-    res.json(savedPerson);
+    try {
+        const opts = {
+            new: true,
+            runValidators: true,
+            context: 'query'
+        }
+        const updatedPerson = await Persons.findByIdAndUpdate(id, person, opts);
+        res.json(updatedPerson);
+    } catch (err) {
+        next(err);
+    }
 })
 
 const unknownEndpoint = (req, res, next) => {
-    res.status(404).json({error: 'unknown endpoint'})
+    res.status(404).json({ error: 'unknown endpoint' })
 }
 
 app.use(unknownEndpoint);
+
+const errorHandler = (err, req, res, next) => {
+    console.error(err.message);
+
+    if (err.name === 'CastError') {
+        return res.status(400).send({ error: 'malformatted id' });
+    } else if(err.name === 'ValidationError') {
+        return res.status(400).json({ error: err.message })
+    }
+    next(err);
+}
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Escuchando servidor desde http://localhost:${PORT}`);

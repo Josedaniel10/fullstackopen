@@ -40,7 +40,7 @@ const App = () => {
       return;
     }
 
-    const existingContact = contacts.find((c) => c.name === changeContact.name);
+    const existingContact = contacts.find((c) => c.name.toLowerCase() === changeContact.name.toLocaleLowerCase());
 
     if (existingContact) {
       const confirmReplacement = window.confirm(`${existingContact.name} already exists in your contact list, do you want to replace him?`);
@@ -54,7 +54,6 @@ const App = () => {
     personService
       .postPerson(changeContact)
       .then(res => {
-        console.log(res)
         setContacts([...contacts, res]);
         setNewName('');
         setNewNumber('');
@@ -64,7 +63,11 @@ const App = () => {
         setNtfSuccess(true);
         setTimeout(()=> setNtfMessage(null), 2000)
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        setNtfMessage(err.response.data.error);
+        setNtfSuccess(false);
+        setTimeout(()=> setNtfMessage(null), 2000)
+      })
   }
 
   function handleDeleteContact(id) {
