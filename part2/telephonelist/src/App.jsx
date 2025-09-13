@@ -104,9 +104,7 @@ const App = () => {
       })
       .catch(err => {
         setNtfSuccess(false);
-        setNtfMessage(
-          `The contact "${changeContact.name}" was removed from the server`
-        )
+        setNtfMessage(err.response.data.error)
         setTimeout(()=> setNtfMessage(null), 2000)
       })
   }

@@ -2,8 +2,6 @@ require('dotenv').config()
 
 const express = require('express');
 const morgan = require('morgan');
-const fs = require('fs');
-const path = require('path');
 const cors = require('cors');
 const Persons = require('./models/persons.js');
 
@@ -52,7 +50,7 @@ app.get('/api/persons/:id', async (req, res, next) => {
 app.delete('/api/persons/:id', async (req, res, next) => {
     const { id } = req.params;
     try {
-        const person = await Persons.findByIdAndDelete(id);
+        await Persons.findByIdAndDelete(id);
         res.status(200).json({ message: 'Successful phone number deletion' })
     } catch (err) {
         next(err);
@@ -98,6 +96,7 @@ app.put('/api/persons/:id', async (req, res, next) => {
 
 const unknownEndpoint = (req, res, next) => {
     res.status(404).json({ error: 'unknown endpoint' })
+    next();
 }
 
 app.use(unknownEndpoint);
@@ -107,7 +106,7 @@ const errorHandler = (err, req, res, next) => {
 
     if (err.name === 'CastError') {
         return res.status(400).send({ error: 'malformatted id' });
-    } else if(err.name === 'ValidationError') {
+    } else if (err.name === 'ValidationError') {
         return res.status(400).json({ error: err.message })
     }
     next(err);

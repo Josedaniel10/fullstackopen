@@ -5,7 +5,7 @@ const uri = process.env.MONGODB_URI;
 mongoose.set('strictQuery', false);
 
 mongoose.connect(uri)
-    .then(res => console.log('✌️ Conectado a MongoDB'))
+    .then(() => console.log('✌️ Conectado a MongoDB'))
     .catch(err => console.error('❌ Error al conectar:', err))
 
 const personsShema = new mongoose.Schema({
