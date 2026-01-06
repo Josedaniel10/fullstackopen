@@ -1,0 +1,10 @@
+POST http://localhost:3002/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QgMSIsImlkIjoiNjhmMmU4ZGEzMGE0YmYyNjNhNjc4N2ZiIiwiaWF0IjoxNzYxMjcyODEzfQ.K4b0BaUIyeiIuY05vJdLgpacFtOgrTrtr2MXv3p06AE
+
+{
+    "title": "Prueba 4",
+    "author": "J.Daniel",
+    "url": "http://web.com",
+    "likes": 4
+}

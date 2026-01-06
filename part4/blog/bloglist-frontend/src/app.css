@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.list-blog {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 8px;
+}
+
+.blog-item {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #0000003c;
+
+    .title, .likes {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .btn-remove {
+        background: rgb(249, 53, 53);
+    }
+}
+
+button {
+    padding: 6px 10px;
+    background: #494949;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    margin: 2px;
+}

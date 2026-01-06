@@ -1,9 +1,0 @@
-PUT http://localhost:3002/api/blogs/68dae52eaa8debcc95382643
-Content-Type: application/json
-
-{
-    "title": "Blog test updated",
-    "author": "J.Daniel",
-    "url": "http://localhost:3002/api/blogs",
-    "likes": 8
-}

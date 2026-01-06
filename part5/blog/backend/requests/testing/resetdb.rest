@@ -1,0 +1,2 @@
+POST http://localhost:3002/api/testing/reset
+Content-Type: application/json

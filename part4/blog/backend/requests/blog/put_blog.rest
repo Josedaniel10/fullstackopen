@@ -1,0 +1,10 @@
+PUT http://localhost:3002/api/blogs/68fad69d7cb31ac35a1c23cb
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QgMSIsImlkIjoiNjhmMmU4ZGEzMGE0YmYyNjNhNjc4N2ZiIiwiaWF0IjoxNzY1NTUzMDg2fQ.Bf3Cos76pYNHtCuJLwVfjnFHj3o7j1VSFOIyrzlD7Bo
+
+{
+    "title": "Actualizar likes",
+    "author": "J.Daniel",
+    "url": "http://localhost:3002/api/blogs",
+    "likes": 2
+}
