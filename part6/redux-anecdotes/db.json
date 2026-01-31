@@ -1,0 +1,39 @@
+{
+  "anecdotes": [
+    {
+      "content": "Mi primera anecdota",
+      "votes": 4,
+      "id": 1
+    },
+    {
+      "content": "Mi segunda anecdota",
+      "id": 2,
+      "votes": 4
+    },
+    {
+      "content": "Mi anecdota de hoy",
+      "votes": 3,
+      "id": 3
+    },
+    {
+      "content": "Nueva anecdota",
+      "votes": 5,
+      "id": 4
+    },
+    {
+      "content": "Ahora si",
+      "votes": 1,
+      "id": 5
+    },
+    {
+      "content": "Hoy tuve esta anecdota...",
+      "votes": 6,
+      "id": 6
+    },
+    {
+      "content": "ddd",
+      "votes": 1,
+      "id": 7
+    }
+  ]
+}
