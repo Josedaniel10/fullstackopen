@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+.list-blog {
+  width: 60%;
+  display: flex;
+  font-size: 14px;
+  flex-direction: column;
+  gap: 6px;
+  margin: 8px;
+}
+
+button {
+  padding: 6px 10px;
+  background: #494949;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  margin: 2px;
+}

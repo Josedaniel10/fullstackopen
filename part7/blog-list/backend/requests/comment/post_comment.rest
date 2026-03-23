@@ -1,0 +1,6 @@
+POST http://localhost:3002/api/blogs/68dae52eaa8debcc95382643/comments
+Content-Type: application/json
+
+{
+    "text": "There are some errors"
+}

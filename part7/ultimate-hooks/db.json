@@ -1,0 +1,84 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "custom-hooks are awesome!"
+    },
+    {
+      "id": 2,
+      "content": "best feature ever <3"
+    },
+    {
+      "content": "new note",
+      "id": 3
+    },
+    {
+      "content": "new note",
+      "id": 4
+    },
+    {
+      "content": "hola",
+      "id": 5
+    },
+    {
+      "content": "hola de nievo",
+      "id": 6
+    },
+    {
+      "content": "sss",
+      "id": 7
+    },
+    {
+      "content": "sss",
+      "id": 8
+    },
+    {
+      "content": "sssss",
+      "id": 9
+    },
+    {
+      "content": "nueva nota",
+      "id": 10
+    },
+    {
+      "content": "mi ultima nota",
+      "id": 11
+    },
+    {
+      "content": "Hola a todos",
+      "id": 12
+    }
+  ],
+  "persons": [
+    {
+      "id": 1,
+      "name": "mluukkai",
+      "number": "040-5483923"
+    },
+    {
+      "id": 2,
+      "name": "hellas",
+      "number": "012-123123"
+    },
+    {
+      "name": "hola",
+      "number": "1234",
+      "id": 3
+    },
+    {
+      "name": "amigo",
+      "number": "1234",
+      "id": 4
+    },
+    {
+      "name": "mi nombre",
+      "number": "mi numero",
+      "id": 5
+    },
+    {
+      "name": "Hello",
+      "number": "Adios",
+      "id": 6
+    }
+  ]
+}
